@@ -1,0 +1,8 @@
+@FCI.MamaGuide.Api_HostAddress = https://localhost:7077
+
+
+
+GET {{FCI.MamaGuide.Api_HostAddress}}/api/hospital?pageNumber=1&pageSize=3
+
+
+###
