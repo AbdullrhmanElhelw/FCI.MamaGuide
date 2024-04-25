@@ -129,4 +129,17 @@ public static class ServiceCollectionExtension
         services.AddScoped<IJwtProvider, JwtProvider>();
         return services;
     }
+
+    public static IServiceCollection AddMigrate(this IServiceCollection services)
+    {
+        using var scope = services
+            .BuildServiceProvider()
+            .CreateScope();
+
+        var context = scope.ServiceProvider
+            .GetRequiredService<MamaGuideDbContext>();
+
+        context.Database.Migrate();
+        return services;
+    }
 }

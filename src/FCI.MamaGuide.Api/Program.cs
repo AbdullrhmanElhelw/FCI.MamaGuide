@@ -47,7 +47,8 @@ builder.Services.AddDataBase(builder.Configuration)
     .AddRepositories()
     .AddIdentityUsers()
     .AddAuthenticationSchema(builder.Configuration)
-    .AddAuthorizationPolices();
+    .AddAuthorizationPolices()
+    .AddMigrate();
 
 var app = builder.Build();
 
