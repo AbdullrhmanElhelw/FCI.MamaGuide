@@ -2,6 +2,7 @@
 
 public sealed record GetAllHospitalDTO
     (
+    Guid Id,
     string Name,
     string Governorate,
     string City,

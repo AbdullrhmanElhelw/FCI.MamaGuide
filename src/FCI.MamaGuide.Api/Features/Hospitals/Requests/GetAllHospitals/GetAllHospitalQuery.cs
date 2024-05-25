@@ -6,4 +6,4 @@ namespace FCI.MamaGuide.Api.Features.Hospitals.Requests.GetAllHospitals;
 public sealed record GetAllHospitalQuery
     (int PageNumber,
      int PageSize,
-     string Search = null) : IQuery<PagedList<GetAllHospitalDTO>>;
+     string Search = null!) : IQuery<PagedList<GetAllHospitalDTO>>;

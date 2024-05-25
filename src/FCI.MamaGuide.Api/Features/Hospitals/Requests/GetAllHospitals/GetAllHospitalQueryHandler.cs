@@ -17,14 +17,15 @@ public sealed class GetAllHospitalQueryHandler
     public async Task<Result<PagedList<GetAllHospitalDTO>>> Handle(GetAllHospitalQuery request, CancellationToken cancellationToken)
     {
         var getHospitals = await _repositoryManager.Hospitals.GetHospitalsAsync(request.PageNumber,
-                                                                           request.PageSize,
-                                                                           request.Search);
+            request.PageSize,
+            request.Search);
 
-        var hospitals = getHospitals.Select(x => new GetAllHospitalDTO(x.Name,
-                                                                       x.Governorate,
-                                                                       x.City,
-                                                                       x.PhoneNumber,
-                                                                       x.Street));
+        var hospitals = getHospitals.Select(x => new GetAllHospitalDTO(x.Id,
+            x.Name,
+            x.Governorate,
+            x.City,
+            x.PhoneNumber,
+            x.Street));
 
         var count = await _repositoryManager.Hospitals.GetHospitalCountAsync();
 
