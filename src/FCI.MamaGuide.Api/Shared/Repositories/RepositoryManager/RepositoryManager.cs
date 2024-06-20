@@ -1,6 +1,7 @@
 ﻿using FCI.MamaGuide.Api.Data;
 using FCI.MamaGuide.Api.Features.Articles.Repository;
 using FCI.MamaGuide.Api.Features.Hospitals.Repository;
+using FCI.MamaGuide.Api.Features.ProfilePictures.Repository;
 using FCI.MamaGuide.Api.Features.ReviewArticle.Repository;
 
 namespace FCI.MamaGuide.Api.Shared.Repositories.RepositoryManager;
@@ -11,6 +12,7 @@ public class RepositoryManager : IRepositoryManager
     private readonly Lazy<IArticleRepository> _articleRepository;
     private readonly Lazy<IHospitalRepository> _hospitalRepository;
     private readonly Lazy<IVerifiedArticleRepository> _verifiedArticleRepository;
+    private readonly Lazy<IProfilePictureRepository> _profilePictureRepository;
 
     public RepositoryManager(MamaGuideDbContext context)
     {
@@ -18,11 +20,14 @@ public class RepositoryManager : IRepositoryManager
         _articleRepository = new(() => new ArticleRepository(_context));
         _hospitalRepository = new(() => new HospitalRepository(_context));
         _verifiedArticleRepository = new(() => new VerifiedArticleRepository(_context));
+        _profilePictureRepository = new(() => new ProfilePictureRepository(_context));
     }
 
     public IArticleRepository Articles => _articleRepository.Value;
     public IHospitalRepository Hospitals => _hospitalRepository.Value;
     public IVerifiedArticleRepository VerifiedArticles => _verifiedArticleRepository.Value;
+
+    public IProfilePictureRepository ProfilePictures => _profilePictureRepository.Value;
 
     public void Dispose() => _context.Dispose();
 

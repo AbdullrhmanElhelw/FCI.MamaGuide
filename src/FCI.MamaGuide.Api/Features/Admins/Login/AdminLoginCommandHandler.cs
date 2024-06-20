@@ -5,7 +5,6 @@ using FCI.MamaGuide.Api.Shared.Authentication.Jwt;
 using FCI.MamaGuide.Api.Shared.CQRS.Commands;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace FCI.MamaGuide.Api.Features.Admins.Login;
 
@@ -34,14 +33,7 @@ public sealed class AdminLoginCommandHandler
         if (!signInResult)
             return Result.Fail("Invalid Password");
 
-        var claims = new List<Claim>()
-        {
-            new(ClaimTypes.NameIdentifier, findAdminIsExists.Id.ToString()),
-            new(ClaimTypes.MobilePhone, findAdminIsExists.PhoneNumber),
-            new(ClaimTypes.Role,nameof(AppRoles.Admin))
-        };
-
-        var token = _jwtProvider.CreateToken(claims);
+        var token = _jwtProvider.CreateToken(findAdminIsExists.Id.ToString(), findAdminIsExists.PhoneNumber, nameof(AppRoles.Admin));
 
         return Result.Ok(token);
     }

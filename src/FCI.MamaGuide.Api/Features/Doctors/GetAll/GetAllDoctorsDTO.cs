@@ -7,4 +7,5 @@ public sealed record GetAllDoctorsDTO
     string PhoneNumber,
     string City,
     string Speciality,
-    string Governorate);
+    string Governorate,
+    bool Gender);

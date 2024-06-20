@@ -32,4 +32,28 @@ public class JwtProvider : IJwtProvider
         return new JwtSecurityTokenHandler()
             .WriteToken(token);
     }
+
+    public string CreateToken(string id, string phoneNumber, string Role)
+    {
+        var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_jwtSettings.Key));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        var expire = DateTime.UtcNow.AddMinutes(Convert.ToDouble(_jwtSettings.ExpiryInMinutes));
+
+        var claims = new List<Claim>
+        {
+            new Claim("Id", id),
+            new Claim("PhoneNumber", phoneNumber),
+            new Claim("Role", Role)
+        };
+
+        var token = new JwtSecurityToken(
+            audience: _jwtSettings.Audience,
+            issuer: _jwtSettings.Issuer,
+            claims: claims,
+            expires: expire,
+            signingCredentials: creds);
+
+        return new JwtSecurityTokenHandler()
+            .WriteToken(token);
+    }
 }

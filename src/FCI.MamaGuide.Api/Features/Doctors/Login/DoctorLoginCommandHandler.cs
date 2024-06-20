@@ -5,7 +5,6 @@ using FCI.MamaGuide.Api.Shared.Authentication.Jwt;
 using FCI.MamaGuide.Api.Shared.CQRS.Commands;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace FCI.MamaGuide.Api.Features.Doctors.Login;
 
@@ -33,14 +32,7 @@ public sealed class DoctorLoginCommandHandler
         if (!isPasswordValid)
             return Result.Fail<string>("Invalid phone number or password");
 
-        var claims = new List<Claim>
-        {
-            new(ClaimTypes.NameIdentifier, findDoctor.Id.ToString()),
-            new(ClaimTypes.MobilePhone, findDoctor.PhoneNumber),
-            new(ClaimTypes.Role,nameof(AppRoles.Doctor))
-        };
-
-        var token = _jwtProvider.CreateToken(claims);
+        var token = _jwtProvider.CreateToken(findDoctor.Id.ToString(), findDoctor.PhoneNumber, nameof(AppRoles.Doctor));
 
         return Result.Ok(token);
     }

@@ -1,6 +1,4 @@
-﻿using System.Security.Claims;
-
-namespace FCI.MamaGuide.Api.Shared.Utility;
+﻿namespace FCI.MamaGuide.Api.Shared.Utility;
 
 public class UserUtility
     (IHttpContextAccessor httpContextAccessor)
@@ -9,7 +7,7 @@ public class UserUtility
 
     public string GetUserId()
     {
-        var claim = ClaimTypes.NameIdentifier;
+        var claim = "Id";
         return _httpContextAccessor.HttpContext.User.FindFirst(claim).Value;
     }
 }

@@ -19,6 +19,8 @@ public sealed class MamaGuideDbContext : IdentityDbContext<BaseIdentityEntity, I
     public DbSet<Hospital> Hospitals => Set<Hospital>();
     public DbSet<Article> Articles => Set<Article>();
 
+    public DbSet<ProfilePicture> ProfilePictures => Set<ProfilePicture>();
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

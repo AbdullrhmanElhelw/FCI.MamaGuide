@@ -39,6 +39,9 @@ public sealed class Doctor : BaseIdentityEntity
     public Guid HospitalId { get; private set; }
     public Hospital Hospital { get; private set; }
 
+    public Guid? ProfilePictureId { get; private set; }
+    public ProfilePicture? ProfilePicture { get; private set; }
+
     public IReadOnlyCollection<Article> Articles => _articles;
 
     public static Doctor Create(string firstName,

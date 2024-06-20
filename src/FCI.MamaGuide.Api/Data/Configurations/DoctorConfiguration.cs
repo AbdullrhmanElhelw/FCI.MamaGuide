@@ -18,5 +18,10 @@ public sealed class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
             .WithOne(e => e.Doctor)
             .HasForeignKey(e => e.DoctorId)
             .OnDelete(DeleteBehavior.NoAction);
+
+        builder.HasOne(e => e.ProfilePicture)
+            .WithOne(e => e.Doctor)
+            .HasForeignKey<Doctor>(e => e.ProfilePictureId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

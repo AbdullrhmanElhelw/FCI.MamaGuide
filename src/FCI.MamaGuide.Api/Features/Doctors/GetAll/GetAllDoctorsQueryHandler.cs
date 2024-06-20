@@ -27,7 +27,8 @@ public sealed class GetAllDoctorsQueryHandler
                                               d.PhoneNumber,
                                               d.City,
                                               d.Specialization,
-                                              d.Governorate))
+                                              d.Governorate,
+                                              d.Gender))
             .Skip((request.PageNumber - 1) * request.PageSize)
             .Take(request.PageSize)
             .ToListAsync(cancellationToken);

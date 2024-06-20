@@ -39,6 +39,8 @@ builder.Services.AddSwaggerGen(c =>
             new List<string>()
         }
     });
+
+    c.AddServer(new OpenApiServer { Url = "http://mamaguide.runasp.net" });
 });
 
 builder.Services.AddDataBase(builder.Configuration)
